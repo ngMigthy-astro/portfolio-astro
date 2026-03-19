@@ -1,4 +1,5 @@
 ---
+import { Menu } from '@lucide/astro';
 const { siteName = "Cesar Jaramillo" } = Astro.props;
 ---
 
@@ -20,7 +21,7 @@ const { siteName = "Cesar Jaramillo" } = Astro.props;
     </nav>
 
     <button class="nav-responsive" aria-label="Abrir menú" aria-controls="nav">
-      <i class="fa-solid fa-bars"></i>
+      <Menu size={20} />
     </button>
   </header>
 </div>

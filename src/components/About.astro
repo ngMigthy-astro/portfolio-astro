@@ -1,26 +1,42 @@
 ---
+import {
+  Code,
+  Database,
+  Server,
+  Smartphone,
+  GitBranch,
+  Terminal,
+  Download,
+  Blocks,
+} from "@lucide/astro";
+
 type Interest = {
   icon: string;
   name: string;
 };
 
+const iconMap: Record<string, any> = {
+  code: Code,
+  database: Database,
+  server: Server,
+  smartphone: Smartphone,
+  "git-branch": GitBranch,
+  terminal: Terminal,
+  blocks: Blocks,
+};
+
 const {
   name = "Cesar Jaramillo",
-  birthdate = "24-01-1997",
-  phone = "462 284 7901",
   email = "cesarjaramillormz@gmail.com",
-  website = "https://cesar-jaramillo.000webhostapp.com/",
   location = "Irapuato, Gto.",
-  position = "Programador web",
+  position = "Desarrollador Web",
   interests = [
-    { icon: "fa-gamepad", name: "JUEGOS" },
-    { icon: "fa-headphones", name: "MUSICA" },
-    { icon: "fa-plane", name: "VIAJAR" },
-    { icon: "fa-video-camera", name: "CINE" },
-    { icon: "fa-podcast", name: "PODCAST" },
-    { icon: "fa-history", name: "HISTORIA" },
-    { icon: "fa-puzzle-piece", name: "PUZZLE" },
-    { icon: "fa-camera", name: "FOTOS" },
+    { icon: "code", name: "FRONTEND" },
+    { icon: "server", name: "BACKEND" },
+    { icon: "database", name: "SQL SERVER" },
+    { icon: "smartphone", name: "RESPONSIVE" },
+    { icon: "git-branch", name: "GIT" },
+    { icon: "terminal", name: "DEVOPS" },
   ] as Interest[],
   cvLink = "https://drive.google.com/file/d/1OqRCNoW1xu5k751Ti461BrxVS8Kt3leX/view?usp=sharing",
 } = Astro.props;
@@ -31,42 +47,38 @@ const {
     <h2>Sobre Mí</h2>
     <p>
       <span>Hola, soy {name}.</span>
-      Soy un apasionado profesional comprometido con la excelencia y el aprendizaje
-      continuo. Mi enfoque principal es la optimización, agilización y automatización
-      de tareas, lo que me permite ofrecer resultados excepcionales en mi trabajo.
-      Soy altamente responsable y siempre busco nuevas oportunidades para mejorar
-      y crecer.
+      Ingeniero en Tecnologías de la Información con más de 2 años de experiencia
+      en desarrollo web. Me especializo en JavaScript, Angular, React, SQL Server
+      y React. Actualmente trabajo en la Secretaría de Finanzas, Inversión y
+      Administración del Estado de Guanajuato, donde desarrollo y doy mantenimiento
+      a sistemas internos, participo
+      en proyectos nuevos e implemento políticas bajo normas ISO. Comprometido con
+      el aprendizaje continuo y las mejores prácticas de desarrollo.
     </p>
 
     <div class="fila">
-      <!-- datos personales -->
       <div class="col">
-        <h3>Datos Personales</h3>
+        <h3>Información</h3>
         <ul>
-          <li><strong>Día natal</strong> {birthdate}</li>
-          <li><strong>Teléfono</strong> {phone}</li>
           <li><strong>Email</strong> {email}</li>
-          <li>
-            <strong>Website</strong>
-            <a href={website} target="_blank" rel="noopener noreferrer"
-              >{website}</a>
-          </li>
-          <li><strong>Dirección</strong> {location}</li>
+          <li><strong>Ubicación</strong> {location}</li>
           <li><strong>Cargo</strong> <span>{position}</span></li>
         </ul>
       </div>
 
-      <!-- intereses -->
       <div class="col">
-        <h3>Intereses</h3>
+        <h3>Enfoque</h3>
         <div class="contenedor-intereses">
           {
-            interests.map((interest: Interest) => (
-              <div class="interes">
-                <i class={`fa-solid ${interest.icon}`} />
-                <span>{interest.name}</span>
-              </div>
-            ))
+            interests.map((interest: Interest) => {
+              const IconComponent = iconMap[interest.icon];
+              return (
+                <div class="interes">
+                  {IconComponent && <IconComponent size={30} />}
+                  <span>{interest.name}</span>
+                </div>
+              );
+            })
           }
         </div>
       </div>
@@ -78,8 +90,7 @@ const {
         href={cvLink}
         aria-label={`Descargar CV de ${name}`}
       >
-        Descargar CV
-        <i class="fa-solid fa-download" aria-hidden="true"></i>
+        Descargar CV <Download size={16} />
       </a>
       <span class="overlay"></span>
     </button>

@@ -1,19 +1,21 @@
 ---
 const {
   technicalSkills = [
-    { name: "Javascript", level: 60 },
-    { name: "HTML & CSS", level: 60 },
-    { name: "Photoshop", level: 65 },
-    { name: "Laravel", level: 15 },
-    { name: "PHP", level: 30 }
+    { name: "JavaScript", level: 80 },
+    { name: "Angular", level: 75 },
+    { name: "HTML & CSS", level: 85 },
+    { name: "Node.js", level: 50 },
+    { name: "SQL Server", level: 70 },
+    { name: "React", level: 50 },
+    { name: "Astro", level: 55 },
+    { name: "Git", level: 70 },
   ],
   professionalSkills = [
-    { name: "Comunicación", level: 80 },
+    { name: "Resolución de problemas", level: 85 },
     { name: "Trabajo en Equipo", level: 85 },
-    { name: "Creatividad", level: 90 },
-    { name: "Dedicación", level: 90 },
-    { name: "Organización", level: 85 }
-  ]
+    { name: "Aprendizaje continuo", level: 90 },
+    { name: "Implementación de normas ISO", level: 75 },
+  ],
 } = Astro.props;
 ---
 
@@ -24,31 +26,35 @@ const {
       <!-- Habilidades técnicas -->
       <div class="col">
         <h3>Habilidades Técnicas</h3>
-        {technicalSkills.map((skill: { name: string; level: number }) => (
-          <div class="skill" data-key={skill.name}>
-            <span>{skill.name}</span>
-            <div class="barra-skill">
-              <div class="progreso" style={`width: ${skill.level}%`}>
-                <span>{skill.level}%</span>
+        {
+          technicalSkills.map((skill: { name: string; level: number }) => (
+            <div class="skill" data-key={skill.name}>
+              <span>{skill.name}</span>
+              <div class="barra-skill">
+                <div class="progreso" style={`width: ${skill.level}%`}>
+                  <span>{skill.level}%</span>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
 
       <!-- Habilidades profesionales -->
       <div class="col">
         <h3>Habilidades Profesionales</h3>
-        {professionalSkills.map((skill: { name: string; level: number }) => (
-          <div class="skill" data-key={skill.name}>
-            <span>{skill.name}</span>
-            <div class="barra-skill">
-              <div class="progreso" style={`width: ${skill.level}%`}>
-                <span>{skill.level}%</span>
+        {
+          professionalSkills.map((skill: { name: string; level: number }) => (
+            <div class="skill" data-key={skill.name}>
+              <span>{skill.name}</span>
+              <div class="barra-skill">
+                <div class="progreso" style={`width: ${skill.level}%`}>
+                  <span>{skill.level}%</span>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </div>

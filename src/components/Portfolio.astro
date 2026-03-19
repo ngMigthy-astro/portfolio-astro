@@ -1,61 +1,53 @@
 ---
 const projects = [
   {
-    title: "Diseño Creativo",
-    description: "Fotografía",
-    imageSrc: "/img/p1.jpg",
-    alt: "Proyecto de diseño creativo 1",
+    title: "Portal Jurídico - Sec. de Finanzas",
+    description: "Angular · TypeScript",
+    imageSrc: "/img/projects/portal-finanzas.jpg",
+    alt: "Portal público de la Secretaría de Finanzas del Estado de Guanajuato",
   },
   {
-    title: "Diseño Creativo",
-    description: "Fotografía",
-    imageSrc: "/img/p2.jpg",
-    alt: "Proyecto de diseño creativo 2",
+    title: "Holiday Inn - Dashboard",
+    description: "Angular · SQL Server",
+    imageSrc: "/img/projects/holidayinn-dashboard.jpg",
+    alt: "Dashboard de métricas y tickets para Holiday Inn Irapuato",
   },
   {
-    title: "Diseño Creativo",
-    description: "Fotografía",
-    imageSrc: "/img/p3.jpg",
-    alt: "Proyecto de diseño creativo 3",
+    title: "Holiday Inn - Gestión de Usuarios",
+    description: "Angular · CRUD · Filtros",
+    imageSrc: "/img/projects/holidayinn-usuarios.jpg",
+    alt: "Sistema de gestión de usuarios para Holiday Inn Irapuato",
   },
   {
-    title: "Diseño Creativo",
-    description: "Fotografía",
-    imageSrc: "/img/p4.jpg",
-    alt: "Proyecto de diseño creativo 4",
+    title: "Generador QR",
+    description: "JavaScript · Canvas API",
+    imageSrc: "/img/projects/generador-qr.jpg",
+    alt: "Generador de códigos QR con personalización",
   },
   {
-    title: "Diseño Creativo",
-    description: "Fotografía",
-    imageSrc: "/img/p5.jpg",
-    alt: "Proyecto de diseño creativo 5",
-  },
-  {
-    title: "Diseño Creativo",
-    description: "Fotografía",
-    imageSrc: "/img/p6.jpg",
-    alt: "Proyecto de diseño creativo 6",
+    title: "El Archivo Simpsons",
+    description: "JavaScript · API REST · Zod",
+    imageSrc: "/img/projects/simpsons-api.jpg",
+    alt: "Aplicación de consulta de personajes de Los Simpsons",
   },
 ];
 ---
 
-<section id="portfolio" class="portfolio py-10">
-  <div class="contenido-seccion max-w-7xl mx-auto px-6">
-    <h2 class="text-4xl font-bold text-center text-gray-800 mb-8">PORTFOLIO</h2>
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6"
-    >
+<section id="portfolio" class="portfolio">
+  <div class="contenido-seccion">
+    <h2>PORTFOLIO</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {
         projects.map((project) => (
-          <div class="proyecto relative group">
+          <div class="proyecto relative group overflow-hidden rounded-lg cursor-pointer">
             <img
               src={project.imageSrc}
               alt={project.alt}
-              class="w-full h-auto rounded-lg shadow-lg"
+              class="w-full h-56 object-cover block transition-transform duration-500 group-hover:scale-105"
             />
-            <div class="overlay absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center text-white transition-all duration-300 rounded-lg">
-              <h3 class="text-2xl font-semibold">{project.title}</h3>
-              <p class="mt-2">{project.description}</p>
+            <div class="absolute inset-0 bg-[rgba(28,182,152,0.85)] flex flex-col items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <h3 class="text-xl font-bold mb-1 font-['Righteous']">{project.title}</h3>
+              <p class="text-sm tracking-wider">{project.description}</p>
             </div>
           </div>
         ))

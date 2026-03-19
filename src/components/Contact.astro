@@ -1,48 +1,134 @@
 ---
+import { Send, MapPin, Smartphone, Mail } from '@lucide/astro';
+
 const contactInfo = {
   location: "Irapuato, Gto. México",
   phone: "4622847901",
   email: "cesarjaramillrmz@gmail.com",
 };
+
+const WEB3FORMS_KEY = "f31d7ddd-fec9-4776-ad95-9e6cc0692a29";
 ---
 
 <section id="contacto" class="contacto">
   <div class="contenido-seccion">
     <h2>CONTACTO</h2>
-    <div class="fila">
-      <!-- Formulario -->
-      <div class="col">
-        <input type="text" placeholder="Tú Nombre" />
-        <input type="text" placeholder="Número telefónico" />
-        <input type="text" placeholder="Dirección de correo" />
-        <input type="text" placeholder="Tema" />
-        <textarea name="" id="" cols="30" rows="8" placeholder="Mensaje"
-        ></textarea>
-        <button>
-          Enviar Mensaje<i class="fa-solid fa-paper-plane"></i>
-          <span class="overlay"></span>
-        </button>
-      </div>
-      <!-- Mapa -->
-      <div class="col">
-        <img src="img/ubicacion.png" alt="" />
-        <div class="info">
-          <ul>
-            <li>
-              <i class="fa-solid fa-location-dot"></i>
-              {contactInfo.location}
-            </li>
-            <li>
-              <i class="fa-solid fa-mobile-screen"></i>
-              {contactInfo.phone}
-            </li>
-            <li>
-              <i class="fa-solid fa-envelope"></i>
-              <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
-            </li>
-          </ul>
+    <p class="text-center text-gray-400 mb-10 text-base">¿Tienes un proyecto en mente? ¡Hablemos!</p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-6 items-start">
+
+      <!-- Info de contacto -->
+      <div class="bg-transparent border border-white/10 rounded-2xl p-8 flex flex-col gap-8">
+        <div>
+          <h3 class="text-lg font-semibold text-white mb-2">Información de contacto</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">No dudes en contactarme a través del formulario o por cualquiera de estos medios.</p>
         </div>
+        <ul class="flex flex-col gap-6 list-none">
+          <li class="flex items-center gap-4">
+            <span class="w-11 h-11 bg-[#1CB698]/10 border border-[#1CB698]/30 rounded-xl flex items-center justify-center text-[#1CB698] shrink-0">
+              <MapPin size={18} />
+            </span>
+            <div class="flex flex-col gap-0.5">
+              <strong class="text-xs uppercase tracking-wider text-gray-400 font-semibold">Ubicación</strong>
+              <span class="text-white text-sm">{contactInfo.location}</span>
+            </div>
+          </li>
+          <li class="flex items-center gap-4">
+            <span class="w-11 h-11 bg-[#1CB698]/10 border border-[#1CB698]/30 rounded-xl flex items-center justify-center text-[#1CB698] shrink-0">
+              <Smartphone size={18} />
+            </span>
+            <div class="flex flex-col gap-0.5">
+              <strong class="text-xs uppercase tracking-wider text-gray-400 font-semibold">Teléfono</strong>
+              <span class="text-white text-sm">{contactInfo.phone}</span>
+            </div>
+          </li>
+          <li class="flex items-center gap-4">
+            <span class="w-11 h-11 bg-[#1CB698]/10 border border-[#1CB698]/30 rounded-xl flex items-center justify-center text-[#1CB698] shrink-0">
+              <Mail size={18} />
+            </span>
+            <div class="flex flex-col gap-0.5">
+              <strong class="text-xs uppercase tracking-wider text-gray-400 font-semibold">Email</strong>
+              <a href={`mailto:${contactInfo.email}`} class="text-white text-sm hover:text-[#1CB698] transition-colors">{contactInfo.email}</a>
+            </div>
+          </li>
+        </ul>
       </div>
+
+      <!-- Formulario -->
+      <div class="bg-[#252A2E] rounded-2xl p-10">
+        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+          <input type="hidden" name="subject" value="Nuevo mensaje desde tu Portfolio" />
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+            <div class="flex flex-col gap-1.5">
+              <label for="name" class="text-xs uppercase tracking-wider font-semibold text-gray-400">Nombre</label>
+              <input type="text" id="name" name="name" placeholder="Tu nombre" required />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="email" class="text-xs uppercase tracking-wider font-semibold text-gray-400">Email</label>
+              <input type="email" id="email" name="email" placeholder="tucorreo@email.com" required />
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-1.5 mb-5">
+            <label for="subject" class="text-xs uppercase tracking-wider font-semibold text-gray-400">Asunto</label>
+            <input type="text" id="subject" name="subject" placeholder="¿De qué se trata?" />
+          </div>
+
+          <div class="flex flex-col gap-1.5 mb-6">
+            <label for="message" class="text-xs uppercase tracking-wider font-semibold text-gray-400">Mensaje</label>
+            <textarea id="message" name="message" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+          </div>
+
+          <button type="submit" id="submit-btn"
+            class="inline-flex items-center gap-2 px-7 py-3 bg-[#1CB698] hover:bg-[#159a7f] text-white font-semibold rounded-lg transition-all duration-200 hover:-translate-y-0.5 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0">
+            <span id="btn-texto">Enviar Mensaje</span>
+            <Send size={18} />
+          </button>
+        </form>
+      </div>
+
     </div>
   </div>
 </section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const btnTexto = document.getElementById('btn-texto') as HTMLSpanElement;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    btnTexto.textContent = "Enviando...";
+    submitBtn.disabled = true;
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        form.reset();
+        btnTexto.textContent = "¡Mensaje enviado!";
+        setTimeout(() => {
+          btnTexto.textContent = 'Enviar Mensaje';
+          submitBtn.disabled = false;
+        }, 3000);
+      } else {
+        alert("Error: " + data.message);
+        btnTexto.textContent = "Enviar Mensaje";
+        submitBtn.disabled = false;
+      }
+    } catch {
+      alert("Algo salió mal. Inténtalo de nuevo.");
+      btnTexto.textContent = "Enviar Mensaje";
+      submitBtn.disabled = false;
+    }
+  });
+</script>

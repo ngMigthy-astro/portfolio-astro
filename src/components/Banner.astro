@@ -1,21 +1,26 @@
 ---
-const {
-  name = "Cesar Jaramillo",
-  title = "Ingeniero en Tecnologías de la Información",
-  image = "/img/hero.jpg",
-  socialLinks = [
-    { href: "https://facebook.com", icon: "fa-facebook-f", label: "Facebook" },
-    { href: "https://twitter.com", icon: "fa-twitter", label: "Twitter" },
-    { href: "https://t.me", icon: "fa-paper-plane", label: "Telegram" },
-    { href: "https://linkedin.com", icon: "fa-linkedin-in", label: "LinkedIn" },
-  ],
-} = Astro.props;
+import { Github, Linkedin } from '@lucide/astro';
+
+const iconMap: Record<string, any> = {
+  github: Github,
+  linkedin: Linkedin,
+};
 
 type SocialLink = {
   href: string;
   icon: string;
   label: string;
 };
+
+const {
+  name = "Cesar Jaramillo",
+  title = "Desarrollador Web | JavaScript • Angular • React",
+  image = "/img/hero.jpg",
+  socialLinks = [
+    { href: "https://github.com/ngMigthy-astro", icon: "github", label: "Github" },
+    { href: "https://linkedin.com", icon: "linkedin", label: "LinkedIn" },
+  ],
+} = Astro.props;
 ---
 
 <section id="inicio" class="inicio">
@@ -27,16 +32,19 @@ type SocialLink = {
     <h2>{title}</h2>
     <div class="redes">
       {
-        socialLinks.map((link: SocialLink) => (
-          <a
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={link.label}
-          >
-            <i class={`fa-brands ${link.icon}`} />
-          </a>
-        ))
+        socialLinks.map((link: SocialLink) => {
+          const IconComponent = iconMap[link.icon];
+          return (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={link.label}
+            >
+              {IconComponent && <IconComponent size={20} />}
+            </a>
+          );
+        })
       }
     </div>
   </div>
